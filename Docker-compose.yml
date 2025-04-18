@@ -1,0 +1,17 @@
+volumes:
+  postgis_data:
+  nats_data:
+
+services:
+  nats-okestra:
+    image: nats:latest
+    container_name: nats-okestra
+    ports:
+      - "4222:4222" # Client connections
+      - "8222:8222" # Monitoring interface
+    command: [
+      "-js", # Enable JetStream
+    ]
+    volumes:
+      - nats_data:/data # Persistent storage
+      - ./data/jetstream:/data/jetstream
